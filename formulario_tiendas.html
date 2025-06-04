@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulario Registro Tiendas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .hidden {
+      display: none;
+    }
+    @media (max-width: 600px) {
+      input, select, textarea, button {
+        font-size: 15px;
+      }
+      body {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Registro de Contacto de Tiendas</h2>
+    <form id="formTienda" onsubmit="enviarFormulario(event)">
+      <label>Nombre de la tienda:
+        <input type="text" name="tienda" required />
+      </label>
+      <label>Medio de contacto:
+        <select name="medio" required>
+          <option value="">-- Seleccionar --</option>
+          <option value="Llamada">📞 Llamada</option>
+          <option value="Mensaje">💬 Mensaje</option>
+        </select>
+      </label>
+      <label>Motivo:
+        <select name="motivo" id="motivo" onchange="mostrarSecciones()" required>
+          <option value="">-- Seleccionar --</option>
+          <option value="Servicio Técnico">🛠️ Servicio Técnico</option>
+          <option value="Logística">📦 Logística</option>
+          <option value="Comercial">💵 Comercial</option>
+          <option value="Otro">📝 Otro</option>
+        </select>
+      </label>
+      <div id="seccionTecnico" class="hidden">
+        <label>SKU del producto:
+          <input type="text" name="sku" />
+        </label>
+        <label>Detalle técnico:
+          <textarea name="detalle_tecnico" rows="3"></textarea>
+        </label>
+      </div>
+      <div id="seccionOtro" class="hidden">
+        <label>Detalle general:
+          <textarea name="detalle_general" rows="3"></textarea>
+        </label>
+      </div>
+      <label>¿Se resolvió en el momento?
+        <select name="resuelto" required>
+          <option value="">-- Seleccionar --</option>
+          <option value="Sí">✅ Sí</option>
+          <option value="No">⏳ No</option>
+          <option value="En proceso">🔁 En proceso</option>
+        </select>
+      </label>
+      <label>Notas adicionales:
+        <textarea name="notas" rows="3"></textarea>
+      </label>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script>
+    const urlScript = "https://script.google.com/macros/s/AKfycbxUeWMZDmiAXNZkiHwqNNjGVYwrzAdr_kq20k7cHz5RwgXzpMhkNKIYTxbSIjunPcBX/exec";
+
+    function mostrarSecciones() {
+      const motivo = document.getElementById("motivo").value;
+      document.getElementById("seccionTecnico").classList.add("hidden");
+      document.getElementById("seccionOtro").classList.add("hidden");
+
+      if (motivo === "Servicio Técnico") {
+        document.getElementById("seccionTecnico").classList.remove("hidden");
+      } else if (motivo !== "") {
+        document.getElementById("seccionOtro").classList.remove("hidden");
+      }
+    }
+
+    function enviarFormulario(e) {
+      e.preventDefault();
+
+      const form = document.getElementById("formTienda");
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      fetch(urlScript, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (response.ok) {
+            alert("✅ Formulario enviado correctamente");
+            form.reset();
+            mostrarSecciones();
+          } else {
+            alert("❌ Error al enviar");
+          }
+        })
+        .catch((error) => {
+          alert("❌ Error de conexión: " + error);
+        });
+    }
+  </script>
+</body>
+</html>
