@@ -61,10 +61,41 @@
 </head>
 <body>
   <div class="container">
-    <h2>Registro de Contacto de Tiendas</h2>
+    <h2>Registro de Comunicación con PUNTOS DE VENTA</h2>
     <form id="formTienda" onsubmit="enviarFormulario(event)">
       <label>Nombre de la tienda:
-        <input type="text" name="tienda" required />
+         <select name="medio" required>
+          <option value="">-- Seleccionar --</option>
+          <option value="SUNTIME 01">SUNTIME 01</option>
+          <option value="SUNTIME 01">SUNTIME 02</option>
+          <option value="SUNTIME 01">SUNTIME 03</option>
+          <option value="SUNTIME 01">SUNTIME 04</option>
+          <option value="SUNTIME 01">SUNTIME 05</option>
+          <option value="SUNTIME 01">SUNTIME 06</option>
+          <option value="SUNTIME 01">SUNTIME 07</option>
+          <option value="SUNTIME 01">SUNTIME 08</option>
+          <option value="SUNTIME 01">SUNTIME 09</option>
+          <option value="SUNTIME 01">SUNTIME 10</option>
+          <option value="SUNTIME 01">SUNTIME 11</option>
+          <option value="SUNTIME 01">SUNTIME 14</option>
+          <option value="SUNTIME 01">SUNTIME 16</option>
+          <option value="SUNTIME 01">SUNTIME 18</option>
+          <option value="SUNTIME 01">SUNTIME 19</option>
+          <option value="SUNTIME 01">SUNTIME 20</option>
+          <option value="SUNTIME 01">SUNTIME 21</option>
+          <option value="SUNTIME 01">SUNTIME 22</option>
+          <option value="SUNTIME 01">SUNTIME 23</option>
+          <option value="SUNTIME 01">SUNTIME 28</option>
+          <option value="SUNTIME 01">SUNTIME 29</option>
+          <option value="SUNTIME 01">SUNTIME 30</option>
+          <option value="SUNTIME 01">SUNTIME 31</option>
+          <option value="SUNTIME 01">SUNTIME 32</option>
+          <option value="SUNTIME 01">SUNTIME 33</option>
+          <option value="SUNTIME 01">SUNTIME 35</option>
+          <option value="SUNTIME 01">SUNTIME 38</option>
+          <option value="SUNTIME 01">SUNTIME 40</option>
+          <option value="SUNTIME 01">SOS 02</option>
+        </select>
       </label>
       <label>Medio de contacto:
         <select name="medio" required>
@@ -77,8 +108,8 @@
         <select name="motivo" id="motivo" onchange="mostrarSecciones()" required>
           <option value="">-- Seleccionar --</option>
           <option value="Servicio Técnico">🛠️ Servicio Técnico</option>
-          <option value="Logística">📦 Logística</option>
-          <option value="Comercial">💵 Comercial</option>
+          <option value="Logística">📦 Envío mantenimiento</option>
+          <option value="Comercial">💵 Ventas</option>
           <option value="Otro">📝 Otro</option>
         </select>
       </label>
